@@ -1,26 +1,92 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --charcoal: #1A1714;
+  --charcoal-deep: #0f0d0b;
+  --tan: #B89970;
+  --tan-light: #C4A882;
+  --tan-muted: #a08660;
+  --cream: #F7F5F2;
+  --warm-gray: #E8E0D6;
+  --white: #ffffff;
+  --text-dark: #1A1714;
+  --text-mid: #3D3530;
+  --text-muted: #7A6E67;
+  --border-light: #E8E0D6;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-deep: var(--charcoal-deep);
+  --color-tan: var(--tan);
+  --color-tan-light: var(--tan-light);
+  --color-tan-muted: var(--tan-muted);
+  --color-cream: var(--cream);
+  --color-warm-gray: var(--warm-gray);
+  --color-text-dark: var(--text-dark);
+  --color-text-mid: var(--text-mid);
+  --color-text-muted: var(--text-muted);
+  --color-border-light: var(--border-light);
+  --font-heading: var(--font-inter);
+  --font-body: var(--font-inter);
+  --font-script: var(--font-script);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--white);
+  color: var(--text-dark);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  position: relative;
+}
+
+/* Video play button overlay */
+.video-card {
+  position: relative;
+  cursor: pointer;
+}
+
+.video-card .play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(26, 23, 20, 0.25);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+  z-index: 2;
+}
+
+.video-card:hover .play-btn {
+  opacity: 1;
+}
+
+.video-card .play-btn .play-icon {
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.video-card:hover .play-btn .play-icon {
+  transform: scale(1.1);
+  filter: brightness(1.15);
+}
+
+.video-card .video-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  text-align: center;
+  z-index: 2;
+}
+
+.video-card .video-label p {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 0, 0, 0.3);
 }

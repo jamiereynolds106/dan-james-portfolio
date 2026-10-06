@@ -1,69 +1,291 @@
+"use client";
+
+import { useState, useRef } from "react";
 import Image from "next/image";
 
+/* ─── Video Data ─── */
+const videos: {
+  id: number;
+  src: string;
+  poster: string;
+  label: string;
+  category: string;
+}[] = [
+  // Add videos here:
+  // { id: 1, src: "/images/video-1.mp4", poster: "/images/poster-1.jpg", label: "Video Title", category: "ugc" },
+];
+
 export default function Home() {
+  const [activeFilter, setActiveFilter] = useState("all");
+  const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
+  const [playingId, setPlayingId] = useState<number | null>(null);
+
+  const toggleVideo = (id: number) => {
+    const video = videoRefs.current[id];
+    if (!video) return;
+
+    if (playingId === id) {
+      video.pause();
+      setPlayingId(null);
+    } else {
+      if (playingId !== null && videoRefs.current[playingId]) {
+        videoRefs.current[playingId]!.pause();
+      }
+      video.play();
+      setPlayingId(id);
+    }
+  };
+
+  const filteredVideos =
+    activeFilter === "all"
+      ? videos
+      : videos.filter((v) => v.category === activeFilter);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+    <>
+      {/* ═══════════ NAVIGATION ═══════════ */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-border-light/50">
+        <div className="max-w-[1400px] mx-auto px-6 py-5 flex items-center justify-between">
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#"
+            className="text-sm font-semibold tracking-[0.08em] text-text-dark"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
+            Dan James
           </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          <div className="flex items-center gap-8">
+            {["Work", "Contact"].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-text-muted hover:text-text-dark transition-colors"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
         </div>
+      </nav>
+
+      <main>
+        {/* ═══════════ HERO ═══════════ */}
+        <section
+          className="min-h-screen flex items-center relative overflow-hidden"
+          style={{
+            background: "linear-gradient(160deg, #2a2420 0%, #0f0d0b 100%)",
+          }}
+        >
+          <div className="max-w-[1400px] mx-auto px-6 pt-24 pb-16 md:py-32 grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
+            <div className="order-2 md:order-1">
+              <p className="font-script text-tan-light text-3xl md:text-4xl mb-4">
+                {/* Tagline goes here */}
+                your story, authentically told
+              </p>
+              <h1
+                className="font-bold text-white leading-[1.05] mb-6 tracking-[-0.02em]"
+                style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
+              >
+                DAN JAMES
+              </h1>
+              <p className="text-white/50 text-lg md:text-xl max-w-[480px] leading-relaxed mb-8 font-light">
+                {/* Bio tagline goes here */}
+                Content creator and storyteller bringing authentic perspectives to every project.
+              </p>
+              <a
+                href="#work"
+                className="inline-block bg-tan hover:bg-tan-light text-white font-semibold text-[0.72rem] tracking-[0.18em] uppercase px-8 py-4 rounded-full transition-all duration-300"
+              >
+                See My Work
+              </a>
+            </div>
+
+            <div className="relative order-1 md:order-2">
+              <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-charcoal/50 flex items-center justify-center">
+                {/* Replace with headshot: */}
+                {/* <Image src="/images/headshot.jpg" alt="Dan James" fill className="object-cover" style={{ objectPosition: "center top" }} priority /> */}
+                <span className="text-white/30 text-sm tracking-wide uppercase">Headshot</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════ PORTFOLIO / VIDEO GRID ═══════════ */}
+        <section id="work" className="bg-white py-20 md:py-28">
+          <div className="max-w-[1400px] mx-auto px-6">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+              <div>
+                <p className="font-script text-tan text-2xl md:text-3xl mb-2">
+                  portfolio
+                </p>
+                <h2 className="text-3xl md:text-5xl font-bold text-text-dark leading-tight tracking-[-0.02em]">
+                  Featured Work
+                </h2>
+              </div>
+
+              <div className="flex gap-3 mt-6 md:mt-0">
+                {["all", "ugc"].map((filter) => (
+                  <button
+                    key={filter}
+                    onClick={() => setActiveFilter(filter)}
+                    className={`text-[0.72rem] tracking-[0.14em] uppercase font-semibold px-5 py-2.5 rounded-full transition-all duration-200 ${
+                      activeFilter === filter
+                        ? "bg-charcoal text-white"
+                        : "bg-cream text-text-muted hover:bg-charcoal hover:text-white"
+                    }`}
+                  >
+                    {filter}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {filteredVideos.length > 0 ? (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {filteredVideos.map((video) => (
+                  <div
+                    key={video.id}
+                    className="video-card rounded-xl overflow-hidden"
+                    onClick={() => video.src && toggleVideo(video.id)}
+                  >
+                    <video
+                      ref={(el) => {
+                        videoRefs.current[video.id] = el;
+                      }}
+                      className="w-full aspect-[9/16] object-cover rounded-xl"
+                      playsInline
+                      loop
+                      controls
+                      preload="metadata"
+                      poster={video.poster}
+                    >
+                      <source src={video.src} type="video/mp4" />
+                    </video>
+
+                    <div className="play-btn">
+                      <div className="play-icon w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <svg
+                          width="14"
+                          height="16"
+                          viewBox="0 0 14 16"
+                          fill="none"
+                        >
+                          <path d="M14 8L0 16V0L14 8Z" fill="white" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    <div className="video-label">
+                      <p className="text-white text-base md:text-lg font-semibold">
+                        {video.label}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-20 text-text-muted">
+                <p className="text-lg">Videos coming soon</p>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* ═══════════ ABOUT ═══════════ */}
+        <section
+          id="about"
+          className="py-20 md:py-28"
+          style={{
+            background: "linear-gradient(160deg, #2a2420 0%, #0f0d0b 100%)",
+          }}
+        >
+          <div className="max-w-[1400px] mx-auto px-6">
+            <div className="max-w-[700px]">
+              <p className="font-script text-tan-light text-2xl md:text-3xl mb-4">
+                the creator
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 leading-tight tracking-[-0.02em]">
+                About Dan
+              </h2>
+              <div className="space-y-5 text-white/60 leading-relaxed text-lg font-light mb-10">
+                <p>
+                  {/* Bio paragraph 1 */}
+                  Bio coming soon.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-white/40">
+                {[
+                  "Authentic",
+                  "Creative",
+                  "Professional",
+                ].map((trait, i, arr) => (
+                  <span key={trait} className="flex items-center gap-4">
+                    {trait}
+                    {i < arr.length - 1 && <span className="text-white/20">/</span>}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════ CONTACT ═══════════ */}
+        <section id="contact" className="bg-white py-20 md:py-28">
+          <div className="max-w-[600px] mx-auto px-6 text-center">
+            <p className="font-script text-tan text-3xl mb-4">
+              let&apos;s work together
+            </p>
+            <h2 className="text-3xl md:text-5xl font-bold text-text-dark mb-6 leading-tight tracking-[-0.02em]">
+              Ready to Create Something?
+            </h2>
+            <p className="text-text-muted text-lg leading-relaxed mb-10 font-light">
+              Get in touch to discuss your next project.
+            </p>
+
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-14">
+              <a
+                href="mailto:dan@example.com"
+                className="inline-block bg-charcoal hover:bg-charcoal-deep text-white font-semibold text-[0.72rem] tracking-[0.18em] uppercase px-8 py-4 rounded-full transition-colors"
+              >
+                Get in Touch
+              </a>
+              <a
+                href="https://instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block border border-border-light text-text-muted hover:text-text-dark hover:border-text-mid font-semibold text-[0.72rem] tracking-[0.18em] uppercase px-8 py-4 rounded-full transition-colors"
+              >
+                Instagram
+              </a>
+            </div>
+
+            <div className="flex flex-col items-center gap-4">
+              <a
+                href="https://instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-muted hover:text-tan transition-colors"
+              >
+                <span className="block text-sm font-medium text-text-dark">Instagram</span>
+                <span className="text-sm">@handle</span>
+              </a>
+              <a
+                href="mailto:dan@example.com"
+                className="text-text-muted hover:text-tan transition-colors"
+              >
+                <span className="block text-sm font-medium text-text-dark">Email</span>
+                <span className="text-sm">dan@example.com</span>
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
-    </div>
+
+      {/* ═══════════ FOOTER ═══════════ */}
+      <footer className="bg-cream border-t border-border-light py-8">
+        <div className="max-w-[1400px] mx-auto px-6 flex justify-between items-center text-text-muted text-sm">
+          <span>&copy; 2026 Dan James</span>
+          <span className="font-semibold text-text-dark tracking-[0.08em]">DJ</span>
+        </div>
+      </footer>
+    </>
   );
 }
