@@ -1,28 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --charcoal: #1A1714;
-  --charcoal-deep: #0f0d0b;
-  --tan: #B89970;
-  --tan-light: #C4A882;
-  --tan-muted: #a08660;
-  --cream: #F7F5F2;
-  --warm-gray: #E8E0D6;
+  --navy: #1B2A49;
+  --navy-deep: #121d33;
+  --cream: #EDE6DA;
+  --coral: #FF6B4A;
+  --coral-soft: #F08A6C;
+  --brass: #C9A45C;
+  --teal: #1F9CA6;
   --white: #ffffff;
-  --text-dark: #1A1714;
-  --text-mid: #3D3530;
-  --text-muted: #7A6E67;
-  --border-light: #E8E0D6;
+  --text-dark: #1B2A49;
+  --text-mid: #3a4a66;
+  --text-muted: #6b7a94;
+  --border-light: #d4cfc6;
 }
 
 @theme inline {
-  --color-charcoal: var(--charcoal);
-  --color-charcoal-deep: var(--charcoal-deep);
-  --color-tan: var(--tan);
-  --color-tan-light: var(--tan-light);
-  --color-tan-muted: var(--tan-muted);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
   --color-cream: var(--cream);
-  --color-warm-gray: var(--warm-gray);
+  --color-coral: var(--coral);
+  --color-coral-soft: var(--coral-soft);
+  --color-brass: var(--brass);
+  --color-teal: var(--teal);
   --color-text-dark: var(--text-dark);
   --color-text-mid: var(--text-mid);
   --color-text-muted: var(--text-muted);
@@ -49,6 +49,8 @@ section {
 .video-card {
   position: relative;
   cursor: pointer;
+  border: 1px solid var(--brass);
+  border-radius: 12px;
 }
 
 .video-card .play-btn {
@@ -57,7 +59,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(26, 23, 20, 0.25);
+  background: rgba(27, 42, 73, 0.3);
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 12px;

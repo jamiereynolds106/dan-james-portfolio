@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Image from "next/image";
 
 /* ─── Video Data ─── */
 const videos: {
@@ -44,11 +43,11 @@ export default function Home() {
   return (
     <>
       {/* ═══════════ NAVIGATION ═══════════ */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-border-light/50">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-navy/90 backdrop-blur-xl border-b border-brass/20">
         <div className="max-w-[1400px] mx-auto px-6 py-5 flex items-center justify-between">
           <a
             href="#"
-            className="text-sm font-semibold tracking-[0.08em] text-text-dark"
+            className="text-sm font-semibold tracking-[0.08em] text-cream"
           >
             Dan James
           </a>
@@ -57,7 +56,7 @@ export default function Home() {
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-text-muted hover:text-text-dark transition-colors"
+                className="text-[0.72rem] font-medium tracking-[0.18em] uppercase text-cream/60 hover:text-cream transition-colors"
               >
                 {item}
               </a>
@@ -68,55 +67,51 @@ export default function Home() {
 
       <main>
         {/* ═══════════ HERO ═══════════ */}
-        <section
-          className="min-h-screen flex items-center relative overflow-hidden"
-          style={{
-            background: "linear-gradient(160deg, #2a2420 0%, #0f0d0b 100%)",
-          }}
-        >
+        <section className="min-h-screen flex items-center relative overflow-hidden bg-navy">
           <div className="max-w-[1400px] mx-auto px-6 pt-24 pb-16 md:py-32 grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
             <div className="order-2 md:order-1">
-              <p className="font-script text-tan-light text-3xl md:text-4xl mb-4">
-                {/* Tagline goes here */}
+              <p className="font-script text-coral-soft text-3xl md:text-4xl mb-4">
                 your story, authentically told
               </p>
               <h1
-                className="font-bold text-white leading-[1.05] mb-6 tracking-[-0.02em]"
+                className="font-bold text-cream leading-[1.05] mb-6 tracking-[-0.02em]"
                 style={{ fontSize: "clamp(2.5rem, 6vw, 5.5rem)" }}
               >
                 DAN JAMES
               </h1>
-              <p className="text-white/50 text-lg md:text-xl max-w-[480px] leading-relaxed mb-8 font-light">
-                {/* Bio tagline goes here */}
+              <p className="text-cream/50 text-lg md:text-xl max-w-[480px] leading-relaxed mb-8 font-light">
                 Content creator and storyteller bringing authentic perspectives to every project.
               </p>
               <a
                 href="#work"
-                className="inline-block bg-tan hover:bg-tan-light text-white font-semibold text-[0.72rem] tracking-[0.18em] uppercase px-8 py-4 rounded-full transition-all duration-300"
+                className="inline-block bg-coral hover:brightness-110 text-white font-semibold text-[0.72rem] tracking-[0.18em] uppercase px-8 py-4 rounded-full transition-all duration-300"
               >
                 See My Work
               </a>
             </div>
 
             <div className="relative order-1 md:order-2">
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-charcoal/50 flex items-center justify-center">
+              <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-brass/30 bg-navy-deep flex items-center justify-center">
                 {/* Replace with headshot: */}
                 {/* <Image src="/images/headshot.jpg" alt="Dan James" fill className="object-cover" style={{ objectPosition: "center top" }} priority /> */}
-                <span className="text-white/30 text-sm tracking-wide uppercase">Headshot</span>
+                <span className="text-cream/20 text-sm tracking-wide uppercase">Headshot</span>
               </div>
             </div>
           </div>
         </section>
 
+        {/* ═══════════ DIVIDER ═══════════ */}
+        <div className="h-1 bg-coral-soft" />
+
         {/* ═══════════ PORTFOLIO / VIDEO GRID ═══════════ */}
-        <section id="work" className="bg-white py-20 md:py-28">
+        <section id="work" className="bg-navy py-20 md:py-28">
           <div className="max-w-[1400px] mx-auto px-6">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
               <div>
-                <p className="font-script text-tan text-2xl md:text-3xl mb-2">
+                <p className="font-script text-coral-soft text-2xl md:text-3xl mb-2">
                   portfolio
                 </p>
-                <h2 className="text-3xl md:text-5xl font-bold text-text-dark leading-tight tracking-[-0.02em]">
+                <h2 className="text-3xl md:text-5xl font-bold text-cream leading-tight tracking-[-0.02em]">
                   Featured Work
                 </h2>
               </div>
@@ -128,8 +123,8 @@ export default function Home() {
                     onClick={() => setActiveFilter(filter)}
                     className={`text-[0.72rem] tracking-[0.14em] uppercase font-semibold px-5 py-2.5 rounded-full transition-all duration-200 ${
                       activeFilter === filter
-                        ? "bg-charcoal text-white"
-                        : "bg-cream text-text-muted hover:bg-charcoal hover:text-white"
+                        ? "bg-coral text-white"
+                        : "bg-cream/10 text-cream/60 hover:bg-coral hover:text-white"
                     }`}
                   >
                     {filter}
@@ -174,7 +169,7 @@ export default function Home() {
                     </div>
 
                     <div className="video-label">
-                      <p className="text-white text-base md:text-lg font-semibold">
+                      <p className="text-cream text-base md:text-lg font-semibold">
                         {video.label}
                       </p>
                     </div>
@@ -182,36 +177,32 @@ export default function Home() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-20 text-text-muted">
+              <div className="text-center py-20 text-cream/40">
                 <p className="text-lg">Videos coming soon</p>
               </div>
             )}
           </div>
         </section>
 
+        {/* ═══════════ DIVIDER ═══════════ */}
+        <div className="h-1 bg-coral-soft" />
+
         {/* ═══════════ ABOUT ═══════════ */}
-        <section
-          id="about"
-          className="py-20 md:py-28"
-          style={{
-            background: "linear-gradient(160deg, #2a2420 0%, #0f0d0b 100%)",
-          }}
-        >
+        <section id="about" className="py-20 md:py-28 bg-navy">
           <div className="max-w-[1400px] mx-auto px-6">
             <div className="max-w-[700px]">
-              <p className="font-script text-tan-light text-2xl md:text-3xl mb-4">
+              <p className="font-script text-coral-soft text-2xl md:text-3xl mb-4">
                 the creator
               </p>
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 leading-tight tracking-[-0.02em]">
+              <h2 className="text-3xl md:text-5xl font-bold text-cream mb-8 leading-tight tracking-[-0.02em]">
                 About Dan
               </h2>
-              <div className="space-y-5 text-white/60 leading-relaxed text-lg font-light mb-10">
+              <div className="space-y-5 text-cream/50 leading-relaxed text-lg font-light mb-10">
                 <p>
-                  {/* Bio paragraph 1 */}
                   Bio coming soon.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-white/40">
+              <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-cream/40">
                 {[
                   "Authentic",
                   "Creative",
@@ -219,7 +210,9 @@ export default function Home() {
                 ].map((trait, i, arr) => (
                   <span key={trait} className="flex items-center gap-4">
                     {trait}
-                    {i < arr.length - 1 && <span className="text-white/20">/</span>}
+                    {i < arr.length - 1 && (
+                      <span className="text-brass/40">—</span>
+                    )}
                   </span>
                 ))}
               </div>
@@ -228,12 +221,12 @@ export default function Home() {
         </section>
 
         {/* ═══════════ CONTACT ═══════════ */}
-        <section id="contact" className="bg-white py-20 md:py-28">
+        <section id="contact" className="bg-cream py-20 md:py-28">
           <div className="max-w-[600px] mx-auto px-6 text-center">
-            <p className="font-script text-tan text-3xl mb-4">
+            <p className="font-script text-coral-soft text-3xl mb-4">
               let&apos;s work together
             </p>
-            <h2 className="text-3xl md:text-5xl font-bold text-text-dark mb-6 leading-tight tracking-[-0.02em]">
+            <h2 className="text-3xl md:text-5xl font-bold text-navy mb-6 leading-tight tracking-[-0.02em]">
               Ready to Create Something?
             </h2>
             <p className="text-text-muted text-lg leading-relaxed mb-10 font-light">
@@ -243,7 +236,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-14">
               <a
                 href="mailto:dan@example.com"
-                className="inline-block bg-charcoal hover:bg-charcoal-deep text-white font-semibold text-[0.72rem] tracking-[0.18em] uppercase px-8 py-4 rounded-full transition-colors"
+                className="inline-block bg-coral hover:brightness-110 text-white font-semibold text-[0.72rem] tracking-[0.18em] uppercase px-8 py-4 rounded-full transition-all"
               >
                 Get in Touch
               </a>
@@ -251,7 +244,7 @@ export default function Home() {
                 href="https://instagram.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block border border-border-light text-text-muted hover:text-text-dark hover:border-text-mid font-semibold text-[0.72rem] tracking-[0.18em] uppercase px-8 py-4 rounded-full transition-colors"
+                className="inline-block border border-navy/20 text-navy hover:border-navy font-semibold text-[0.72rem] tracking-[0.18em] uppercase px-8 py-4 rounded-full transition-colors"
               >
                 Instagram
               </a>
@@ -262,16 +255,16 @@ export default function Home() {
                 href="https://instagram.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-text-muted hover:text-tan transition-colors"
+                className="text-text-muted hover:text-coral transition-colors"
               >
-                <span className="block text-sm font-medium text-text-dark">Instagram</span>
+                <span className="block text-sm font-medium text-navy">Instagram</span>
                 <span className="text-sm">@handle</span>
               </a>
               <a
                 href="mailto:dan@example.com"
-                className="text-text-muted hover:text-tan transition-colors"
+                className="text-text-muted hover:text-coral transition-colors"
               >
-                <span className="block text-sm font-medium text-text-dark">Email</span>
+                <span className="block text-sm font-medium text-navy">Email</span>
                 <span className="text-sm">dan@example.com</span>
               </a>
             </div>
@@ -280,10 +273,10 @@ export default function Home() {
       </main>
 
       {/* ═══════════ FOOTER ═══════════ */}
-      <footer className="bg-cream border-t border-border-light py-8">
-        <div className="max-w-[1400px] mx-auto px-6 flex justify-between items-center text-text-muted text-sm">
+      <footer className="bg-navy border-t border-brass/20 py-8">
+        <div className="max-w-[1400px] mx-auto px-6 flex justify-between items-center text-cream/40 text-sm">
           <span>&copy; 2026 Dan James</span>
-          <span className="font-semibold text-text-dark tracking-[0.08em]">DJ</span>
+          <span className="font-semibold text-cream tracking-[0.08em]">DJ</span>
         </div>
       </footer>
     </>
