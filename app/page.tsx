@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Image from "next/image";
 
 /* ─── Video Data ─── */
 const videos: {
@@ -10,8 +11,14 @@ const videos: {
   label: string;
   category: string;
 }[] = [
-  // Add videos here:
-  // { id: 1, src: "/images/video-1.mp4", poster: "/images/poster-1.jpg", label: "Video Title", category: "ugc" },
+  { id: 1, src: "/images/razor.mp4", poster: "", label: "New Razor", category: "ugc" },
+  { id: 2, src: "/images/disc-parenting.mp4", poster: "", label: "DISC Parenting Tips", category: "ugc" },
+  { id: 3, src: "", poster: "", label: "Coming Soon", category: "ugc" },
+  { id: 4, src: "", poster: "", label: "Coming Soon", category: "ugc" },
+  { id: 5, src: "", poster: "", label: "Coming Soon", category: "ugc" },
+  { id: 6, src: "", poster: "", label: "Coming Soon", category: "ugc" },
+  { id: 7, src: "", poster: "", label: "Coming Soon", category: "ugc" },
+  { id: 8, src: "", poster: "", label: "Coming Soon", category: "ugc" },
 ];
 
 export default function Home() {
@@ -52,7 +59,7 @@ export default function Home() {
             Dan James
           </a>
           <div className="flex items-center gap-8">
-            {["Work", "Contact"].map((item) => (
+            {["Work", "About", "Contact"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -80,7 +87,7 @@ export default function Home() {
                 DAN JAMES
               </h1>
               <p className="text-cream/50 text-lg md:text-xl max-w-[480px] leading-relaxed mb-8 font-light">
-                Content creator and storyteller bringing authentic perspectives to every project.
+                I&apos;ve been talking to people for a living since before the internet. Now I do it on camera — and it hits different.
               </p>
               <a
                 href="#work"
@@ -91,10 +98,8 @@ export default function Home() {
             </div>
 
             <div className="relative order-1 md:order-2">
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-brass/30 bg-navy-deep flex items-center justify-center">
-                {/* Replace with headshot: */}
-                {/* <Image src="/images/headshot.jpg" alt="Dan James" fill className="object-cover" style={{ objectPosition: "center top" }} priority /> */}
-                <span className="text-cream/20 text-sm tracking-wide uppercase">Headshot</span>
+              <div className="aspect-[3/4] rounded-2xl overflow-hidden border border-brass/30 bg-navy-deep relative">
+                <Image src="/images/headshot.jpg" alt="Dan James" fill className="object-cover" style={{ objectPosition: "center top" }} priority />
               </div>
             </div>
           </div>
@@ -135,46 +140,58 @@ export default function Home() {
 
             {filteredVideos.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {filteredVideos.map((video) => (
-                  <div
-                    key={video.id}
-                    className="video-card rounded-xl overflow-hidden"
-                    onClick={() => video.src && toggleVideo(video.id)}
-                  >
-                    <video
-                      ref={(el) => {
-                        videoRefs.current[video.id] = el;
-                      }}
-                      className="w-full aspect-[9/16] object-cover rounded-xl"
-                      playsInline
-                      loop
-                      controls
-                      preload="metadata"
-                      poster={video.poster}
+                {filteredVideos.map((video) =>
+                  video.src ? (
+                    <div
+                      key={video.id}
+                      className="video-card rounded-xl overflow-hidden"
+                      onClick={() => toggleVideo(video.id)}
                     >
-                      <source src={video.src} type="video/mp4" />
-                    </video>
+                      <video
+                        ref={(el) => {
+                          videoRefs.current[video.id] = el;
+                        }}
+                        className="w-full aspect-[9/16] object-cover rounded-xl"
+                        playsInline
+                        loop
+                        controls
+                        preload="metadata"
+                        poster={video.poster || undefined}
+                      >
+                        <source src={video.src} type="video/mp4" />
+                      </video>
 
-                    <div className="play-btn">
-                      <div className="play-icon w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                        <svg
-                          width="14"
-                          height="16"
-                          viewBox="0 0 14 16"
-                          fill="none"
-                        >
-                          <path d="M14 8L0 16V0L14 8Z" fill="white" />
-                        </svg>
+                      <div className="play-btn">
+                        <div className="play-icon w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                          <svg
+                            width="14"
+                            height="16"
+                            viewBox="0 0 14 16"
+                            fill="none"
+                          >
+                            <path d="M14 8L0 16V0L14 8Z" fill="white" />
+                          </svg>
+                        </div>
+                      </div>
+
+                      <div className="video-label">
+                        <p className="text-cream text-base md:text-lg font-semibold">
+                          {video.label}
+                        </p>
                       </div>
                     </div>
-
-                    <div className="video-label">
-                      <p className="text-cream text-base md:text-lg font-semibold">
-                        {video.label}
-                      </p>
+                  ) : (
+                    <div
+                      key={video.id}
+                      className="aspect-[9/16] rounded-xl border border-brass/20 border-dashed bg-navy-deep flex flex-col items-center justify-center gap-3"
+                    >
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" className="text-cream/20">
+                        <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      <p className="text-cream/20 text-sm font-medium">{video.label}</p>
                     </div>
-                  </div>
-                ))}
+                  )
+                )}
               </div>
             ) : (
               <div className="text-center py-20 text-cream/40">
@@ -190,31 +207,52 @@ export default function Home() {
         {/* ═══════════ ABOUT ═══════════ */}
         <section id="about" className="py-20 md:py-28 bg-navy">
           <div className="max-w-[1400px] mx-auto px-6">
-            <div className="max-w-[700px]">
-              <p className="font-script text-coral-soft text-2xl md:text-3xl mb-4">
-                the creator
-              </p>
-              <h2 className="text-3xl md:text-5xl font-bold text-cream mb-8 leading-tight tracking-[-0.02em]">
-                About Dan
-              </h2>
-              <div className="space-y-5 text-cream/50 leading-relaxed text-lg font-light mb-10">
-                <p>
-                  Bio coming soon.
+            <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+              <div>
+                <p className="font-script text-coral-soft text-2xl md:text-3xl mb-4">
+                  the creator
                 </p>
+                <h2 className="text-3xl md:text-5xl font-bold text-cream mb-8 leading-tight tracking-[-0.02em]">
+                  About Dan
+                </h2>
+                <div className="space-y-5 text-cream/50 leading-relaxed text-lg font-light mb-10">
+                  <p>
+                    Here&apos;s the short version: I served in the Army during Desert Shield and Storm, spent eight years in management at Disney, pastored churches, ran global missions trips, and homeschooled four kids all the way through graduation. Somewhere in there I got Maxwell certified and became a DISC consultant. It&apos;s been a full life.
+                  </p>
+                  <p>
+                    The thread through all of it? I know how to talk to people. Not at them — to them. Whether it was a room full of soldiers, a team at Disney, or a teenager figuring out who they are, the skill is the same: be real, be clear, and give a damn.
+                  </p>
+                  <p>
+                    That&apos;s what I bring to content. No teleprompter voice, no corporate speak. Just a guy who&apos;s lived enough life to tell a good story — and knows how to make it look good while he does it.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-cream/40">
+                  {[
+                    "Army Vet",
+                    "Disney Alum",
+                    "Maxwell Certified",
+                    "Dad x4",
+                  ].map((trait, i, arr) => (
+                    <span key={trait} className="flex items-center gap-4">
+                      {trait}
+                      {i < arr.length - 1 && (
+                        <span className="text-brass/40">—</span>
+                      )}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-cream/40">
-                {[
-                  "Authentic",
-                  "Creative",
-                  "Professional",
-                ].map((trait, i, arr) => (
-                  <span key={trait} className="flex items-center gap-4">
-                    {trait}
-                    {i < arr.length - 1 && (
-                      <span className="text-brass/40">—</span>
-                    )}
-                  </span>
-                ))}
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="aspect-square rounded-xl overflow-hidden border border-brass/20 relative">
+                  <Image src="/images/dan-becky.jpg" alt="Dan with his wife" fill className="object-cover" />
+                </div>
+                <div className="aspect-square rounded-xl overflow-hidden border border-brass/20 relative">
+                  <Image src="/images/dan-golf.jpg" alt="Dan on the golf course" fill className="object-cover" />
+                </div>
+                <div className="col-span-2 aspect-[2/1] rounded-xl overflow-hidden border border-brass/20 relative">
+                  <Image src="/images/dan-burger.jpg" alt="Dan enjoying a burger" fill className="object-cover" style={{ objectPosition: "center 30%" }} />
+                </div>
               </div>
             </div>
           </div>
