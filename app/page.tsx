@@ -11,9 +11,9 @@ const videos: {
   label: string;
   category: string;
 }[] = [
-  { id: 1, src: "/images/razor.mp4", poster: "", label: "New Razor", category: "ugc" },
-  { id: 2, src: "/images/disc-parenting.mp4", poster: "", label: "DISC Parenting Tips", category: "ugc" },
-  { id: 3, src: "", poster: "", label: "Coming Soon", category: "ugc" },
+  { id: 1, src: "/images/razor.mp4", poster: "", label: "Personal Hygiene", category: "ugc" },
+  { id: 2, src: "/images/disc-parenting.mp4", poster: "", label: "Personal Development", category: "ugc" },
+  { id: 3, src: "/images/coffee-a.mp4", poster: "", label: "Food and Beverage", category: "ugc" },
   { id: 4, src: "", poster: "", label: "Coming Soon", category: "ugc" },
   { id: 5, src: "", poster: "", label: "Coming Soon", category: "ugc" },
   { id: 6, src: "", poster: "", label: "Coming Soon", category: "ugc" },
@@ -251,7 +251,7 @@ export default function Home() {
                   <Image src="/images/dan-golf.jpg" alt="Dan on the golf course" fill className="object-cover" />
                 </div>
                 <div className="col-span-2 aspect-[2/1] rounded-xl overflow-hidden border border-brass/20 relative">
-                  <Image src="/images/dan-burger.jpg" alt="Dan enjoying a burger" fill className="object-cover" style={{ objectPosition: "center 30%" }} />
+                  <Image src="/images/dan-burger.jpg" alt="Dan enjoying a burger" fill className="object-cover" style={{ objectPosition: "center 20%" }} />
                 </div>
               </div>
             </div>
