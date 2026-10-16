@@ -14,7 +14,7 @@ const videos: {
   { id: 1, src: "/images/razor.mp4", poster: "", label: "Personal Hygiene", category: "ugc" },
   { id: 2, src: "/images/disc-parenting.mp4", poster: "/images/disc-parenting-poster.jpg", label: "Personal Development", category: "ugc" },
   { id: 3, src: "/images/coffee-a.mp4", poster: "/images/coffee-a-poster.jpg", label: "Food and Beverage", category: "ugc" },
-  { id: 4, src: "", poster: "", label: "Coming Soon", category: "ugc" },
+  { id: 4, src: "/images/antique-mall.mp4", poster: "", label: "Shop With Me", category: "ugc" },
   { id: 5, src: "", poster: "", label: "Coming Soon", category: "ugc" },
   { id: 6, src: "", poster: "", label: "Coming Soon", category: "ugc" },
   { id: 7, src: "", poster: "", label: "Coming Soon", category: "ugc" },
