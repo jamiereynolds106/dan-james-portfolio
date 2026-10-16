@@ -273,13 +273,13 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-14">
               <a
-                href="mailto:dan@matthew257.com"
+                href="mailto:bucboy71@gmail.com"
                 className="inline-block bg-coral hover:brightness-110 text-white font-semibold text-[0.72rem] tracking-[0.18em] uppercase px-8 py-4 rounded-full transition-all"
               >
                 Get in Touch
               </a>
               <a
-                href="https://instagram.com/trimthewickglobal"
+                href="https://instagram.com/danjamesugc"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block border border-navy/20 text-navy hover:border-navy font-semibold text-[0.72rem] tracking-[0.18em] uppercase px-8 py-4 rounded-full transition-colors"
@@ -290,20 +290,20 @@ export default function Home() {
 
             <div className="flex flex-col items-center gap-4">
               <a
-                href="https://instagram.com/trimthewickglobal"
+                href="https://instagram.com/danjamesugc"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-text-muted hover:text-coral transition-colors"
               >
                 <span className="block text-sm font-medium text-navy">Instagram</span>
-                <span className="text-sm">@trimthewickglobal</span>
+                <span className="text-sm">@danjamesugc</span>
               </a>
               <a
-                href="mailto:dan@matthew257.com"
+                href="mailto:bucboy71@gmail.com"
                 className="text-text-muted hover:text-coral transition-colors"
               >
                 <span className="block text-sm font-medium text-navy">Email</span>
-                <span className="text-sm">dan@matthew257.com</span>
+                <span className="text-sm">bucboy71@gmail.com</span>
               </a>
             </div>
           </div>
